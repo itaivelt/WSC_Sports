@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: "/WSC_Sports",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
