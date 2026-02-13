@@ -1,0 +1,62 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { LayoutDashboard, PlaySquare, BarChart3, Settings, Zap } from "lucide-react";
+
+const navigation = [
+    { name: "Dashboard", href: "/", icon: LayoutDashboard },
+    { name: "Content Hub", href: "/hub", icon: PlaySquare },
+    { name: "Analytics", href: "/analytics", icon: BarChart3 },
+    { name: "Settings", href: "/settings", icon: Settings },
+];
+
+export function Sidebar() {
+    const pathname = usePathname();
+
+    return (
+        <div className="flex h-full w-64 flex-col bg-black border-r border-[#1a1a1a]">
+            <div className="flex h-16 items-center px-6 border-b border-[#1a1a1a]">
+                <Zap className="h-6 w-6 text-[#d0f200] mr-2" />
+                <span className="text-xl font-bold text-white tracking-tight">WSC Sports</span>
+            </div>
+            <nav className="flex-1 space-y-1 px-3 py-4">
+                {navigation.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            className={cn(
+                                "group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                                isActive
+                                    ? "bg-[#d0f200] text-black"
+                                    : "text-neutral-400 hover:bg-[#1a1a1a] hover:text-white"
+                            )}
+                        >
+                            <item.icon
+                                className={cn(
+                                    "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
+                                    isActive ? "text-black" : "text-neutral-500 group-hover:text-white"
+                                )}
+                            />
+                            {item.name}
+                        </Link>
+                    );
+                })}
+            </nav>
+            <div className="p-4 border-t border-[#1a1a1a]">
+                <div className="flex items-center">
+                    <div className="h-8 w-8 rounded-full bg-[#d0f200] flex items-center justify-center text-xs font-bold text-black">
+                        JD
+                    </div>
+                    <div className="ml-3">
+                        <p className="text-sm font-medium text-white">John Doe</p>
+                        <p className="text-xs text-neutral-500">Admin Partner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
