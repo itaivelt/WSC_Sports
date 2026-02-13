@@ -1,6 +1,6 @@
 "use client";
 
-import { Play, Download, Share2, MoreHorizontal } from "lucide-react";
+import { Play, Download, Share2, MoreHorizontal, LayoutTemplate, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 
 // Mock Data
@@ -100,6 +100,22 @@ export function ContentGrid() {
                         <div className="flex items-center justify-between pt-3 border-t border-white/5">
                             <span className="text-xs text-neutral-500">{asset.date}</span>
                             <div className="flex gap-2">
+                                {/* V1: Multi-Format Preview */}
+                                <button className="p-1.5 hover:bg-[#222] rounded text-neutral-400 hover:text-white transition-colors group/btn relative" title="Multi-Format Preview [V1]">
+                                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-neutral-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                        9:16 Preview
+                                    </div>
+                                    <LayoutTemplate className="w-4 h-4" />
+                                </button>
+
+                                {/* V2: Commerce Overlay */}
+                                <button className="p-1.5 hover:bg-[#222] rounded text-neutral-500 hover:text-neutral-300 transition-colors group/btn relative cursor-not-allowed">
+                                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-neutral-800 text-[#d0f200] text-[10px] px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-[#d0f200]/20">
+                                        Commerce Overlay [V2]
+                                    </div>
+                                    <ShoppingBag className="w-4 h-4" />
+                                </button>
+
                                 <button className="p-1.5 hover:bg-[#222] rounded text-neutral-400 hover:text-[#d0f200] transition-colors" title="Download">
                                     <Download className="w-4 h-4" />
                                 </button>

@@ -13,7 +13,7 @@ interface Asset {
 }
 
 interface ContentRowProps {
-    title: string;
+    title: React.ReactNode;
     assets: Asset[];
 }
 
