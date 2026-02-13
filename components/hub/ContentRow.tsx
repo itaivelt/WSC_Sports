@@ -45,7 +45,7 @@ export function ContentRow({ title, assets }: ContentRowProps) {
 
                 <div
                     ref={rowRef}
-                    className="flex gap-4 overflow-x-auto scrollbar-hide px-6 md:px-12 pb-8 pt-2 scroll-smooth"
+                    className="flex gap-4 overflow-x-auto scrollbar-hide px-4 md:px-12 pb-8 pt-2 scroll-smooth"
                 >
                     {assets.map((asset) => (
                         <div

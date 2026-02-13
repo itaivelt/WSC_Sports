@@ -12,11 +12,11 @@ const navigation = [
     { name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export function Sidebar() {
+export function Sidebar({ className, onClose }: { className?: string; onClose?: () => void }) {
     const pathname = usePathname();
 
     return (
-        <div className="flex h-full w-64 flex-col bg-black border-r border-[#1a1a1a]">
+        <div className={cn("flex h-full w-64 flex-col bg-black border-r border-[#1a1a1a]", className)}>
             <div className="flex h-16 items-center px-6 border-b border-[#1a1a1a]">
                 <Zap className="h-6 w-6 text-[#d0f200] mr-2" />
                 <span className="text-xl font-bold text-white tracking-tight">WSC Sports</span>
@@ -28,6 +28,7 @@ export function Sidebar() {
                         <Link
                             key={item.name}
                             href={item.href}
+                            onClick={onClose}
                             className={cn(
                                 "group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
                                 isActive
