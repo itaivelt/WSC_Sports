@@ -46,37 +46,7 @@ export default function LoginPage() {
                         </p>
                     </div>
 
-                    {/* Tenant Switcher (Simulation) */}
-                    <div className="mb-6">
-                        <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">
-                            Select Organization
-                        </label>
-                        <div className="grid grid-cols-2 gap-3">
-                            <button
-                                onClick={() => setSelectedTenant("nba")}
-                                className={cn(
-                                    "flex items-center justify-center gap-2 p-3 rounded-lg border transition-all",
-                                    selectedTenant === "nba"
-                                        ? "bg-[#d0f200]/10 border-[#d0f200] text-[#d0f200]"
-                                        : "bg-black border-white/10 text-neutral-400 hover:border-white/30"
-                                )}
-                            >
-                                <span className="font-bold">NBA</span>
-                            </button>
-                            <button
-                                onClick={() => setSelectedTenant("laliga")}
-                                className={cn(
-                                    "flex items-center justify-center gap-2 p-3 rounded-lg border transition-all",
-                                    selectedTenant === "laliga"
-                                        ? "bg-[#d0f200]/10 border-[#d0f200] text-[#d0f200]"
-                                        : "bg-black border-white/10 text-neutral-400 hover:border-white/30"
-                                )}
-                            >
-                                <span className="font-bold">LaLiga</span>
-                                <span className="text-[10px] bg-white/10 px-1 rounded ml-1">V2</span>
-                            </button>
-                        </div>
-                    </div>
+                    {/* Tenant Switcher REMOVED - Moved to inside app */}
 
                     {/* SSO Button */}
                     <button
