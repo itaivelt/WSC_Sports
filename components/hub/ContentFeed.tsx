@@ -44,32 +44,56 @@ export function ContentFeed() {
             { id: 15, title: "Skill School", duration: "5:00", date: "1d ago", thumbnail: `https://loremflickr.com/600/337/${key}?random=15` },
         ];
 
-        return { trending, newReleases, forYou };
+        const curatedCollections = [
+            { id: 16, title: "Best Dunks of the Week", duration: "Playlist", date: "Updated 1h ago", thumbnail: `https://loremflickr.com/600/337/${key}?random=16` },
+            { id: 17, title: "Defensive Masterclass", duration: "Playlist", date: "Updated 2h ago", thumbnail: `https://loremflickr.com/600/337/${key}?random=17` },
+            { id: 18, title: "Rookie Watch", duration: "Playlist", date: "Updated 1d ago", thumbnail: `https://loremflickr.com/600/337/${key}?random=18` },
+            { id: 19, title: "Buzzer Beaters", duration: "Playlist", date: "Updated 2d ago", thumbnail: `https://loremflickr.com/600/337/${key}?random=19` },
+            { id: 20, title: "MVP Race", duration: "Playlist", date: "Updated 3d ago", thumbnail: `https://loremflickr.com/600/337/${key}?random=20` },
+        ];
+
+        return { trending, newReleases, forYou, curatedCollections };
     };
 
-    const { trending, newReleases, forYou } = getProviderContent(selectedProvider);
+    const { trending, newReleases, forYou, curatedCollections } = getProviderContent(selectedProvider);
 
     return (
         <div className="pb-20">
             <ContentHero />
             <div className="-mt-12 relative z-10 space-y-8 pl-4">
-                <ContentRow title="Trending Now" assets={trending} />
+                {/* Live Locker Stream [V1] */}
                 <ContentRow
                     title={
                         <div className="flex items-center gap-3">
-                            <span>New Arrivals</span>
-                            <div className="flex items-center gap-1.5 bg-red-600/90 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.5)]">
+                            <span>Live Locker Stream</span>
+                            <div className="flex items-center gap-2 bg-red-600/20 border border-red-500/50 text-red-500 text-[10px] uppercase font-bold px-2 py-0.5 rounded animate-pulse">
                                 <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                                 </span>
-                                LIVE LOCKER
+                                Real-Time
                             </div>
                         </div>
                     }
                     assets={newReleases}
                 />
-                <ContentRow title="Picked For You" assets={forYou} />
+
+                <ContentRow title="Trending Now" assets={trending} />
+
+                {/* Curated Collections [V2] */}
+                <ContentRow
+                    title={
+                        <div className="flex items-center gap-2">
+                            <span>Curated Collections</span>
+                            <span className="text-[10px] bg-[#d0f200]/10 text-[#d0f200] px-2 py-0.5 rounded border border-[#d0f200]/20 font-bold uppercase">
+                                By {selectedProvider || "Editor"}
+                            </span>
+                        </div>
+                    }
+                    assets={curatedCollections}
+                />
+
+                <ContentRow title="picked For You" assets={forYou} />
             </div>
         </div>
     );

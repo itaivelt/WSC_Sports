@@ -1,7 +1,5 @@
-"use client";
-
 import { useRef } from "react";
-import { ChevronLeft, ChevronRight, Play, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Check, Plus, ThumbsUp, ChevronDown, Download, Share2, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Asset {
@@ -38,52 +36,76 @@ export function ContentRow({ title, assets }: ContentRowProps) {
             <div className="relative group">
                 <button
                     onClick={() => scroll('left')}
-                    className="absolute left-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                    className="absolute left-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center transition-all duration-300 backdrop-blur-sm cursor-pointer opacity-0 group-hover:opacity-100"
                 >
                     <ChevronLeft className="w-8 h-8" />
                 </button>
 
                 <div
                     ref={rowRef}
-                    className="flex gap-4 overflow-x-auto px-4 md:px-12 pb-8 pt-2 scroll-smooth snap-x snap-mandatory"
+                    className="flex gap-4 overflow-x-auto px-4 md:px-12 pb-12 pt-8 scroll-smooth snap-x snap-mandatory"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {/* Hide scrollbar for Webkit browsers */}
-                    <style jsx>{`
-                        div::-webkit-scrollbar {
-                            display: none;
-                        }
-                    `}</style>
                     {assets.map((asset) => (
                         <div
                             key={asset.id}
-                            className="flex-none w-[280px] md:w-[320px] aspect-video relative group/card cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-20 origin-center snap-start"
+                            className="flex-none w-[280px] md:w-[320px] aspect-video relative group/card cursor-pointer transition-all duration-300 hover:scale-110 hover:z-50 origin-center snap-start"
                         >
-                            <img
-                                src={asset.thumbnail}
-                                alt={asset.title}
-                                className="w-full h-full object-cover rounded-md"
-                            />
+                            <div className="w-full h-full rounded-md overflow-hidden bg-[#111] shadow-lg transition-all duration-300 group-hover/card:shadow-[#d0f200]/20 group-hover/card:ring-2 group-hover/card:ring-[#d0f200]">
+                                <img
+                                    src={asset.thumbnail}
+                                    alt={asset.title}
+                                    className="w-full h-full object-cover"
+                                />
 
-                            {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity rounded-md flex flex-col justify-between p-4 border border-[#d0f200]/50">
-                                <div className="flex justify-end">
-                                    <div className="bg-[#d0f200] text-black text-xs font-bold px-1.5 py-0.5 rounded">
-                                        {asset.duration}
-                                    </div>
-                                </div>
+                                {/* Netflix-style Hover Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
 
-                                <div>
-                                    <div className="flex gap-2 mb-3">
-                                        <button className="bg-white hover:bg-[#d0f200] text-black p-1.5 rounded-full transition-colors">
-                                            <Play className="w-3 h-3 fill-current" />
-                                        </button>
-                                        <button className="border border-white hover:border-[#d0f200] text-white hover:text-[#d0f200] p-1.5 rounded-full transition-colors">
-                                            <Check className="w-3 h-3" />
-                                        </button>
+                                    {/* Actions Row */}
+                                    <div className="flex items-center justify-between mb-3 translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300 delay-75">
+                                        <div className="flex items-center gap-2">
+                                            <button className="bg-white text-black p-2 rounded-full hover:bg-neutral-200 transition-colors" title="Play">
+                                                <Play className="w-4 h-4 fill-current" />
+                                            </button>
+                                            <button className="border-2 border-neutral-500 text-white p-1.5 rounded-full hover:border-white hover:bg-white/10 transition-colors" title="Add to My List">
+                                                <Plus className="w-4 h-4" />
+                                            </button>
+                                            <button className="border-2 border-neutral-500 text-white p-1.5 rounded-full hover:border-white hover:bg-white/10 transition-colors" title="Like">
+                                                <ThumbsUp className="w-4 h-4" />
+                                            </button>
+                                        </div>
+
+                                        <div className="flex items-center gap-2">
+                                            <button className="bg-[#222] text-neutral-300 p-1.5 rounded-full hover:text-white hover:bg-[#333] border border-[#333]" title="Download">
+                                                <Download className="w-3.5 h-3.5" />
+                                            </button>
+                                            <button className="bg-[#222] text-neutral-300 p-1.5 rounded-full hover:text-white hover:bg-[#333] border border-[#333]" title="9:16 Preview">
+                                                <LayoutTemplate className="w-3.5 h-3.5" />
+                                            </button>
+                                            <button className="border-2 border-neutral-500 text-white p-1.5 rounded-full hover:border-white hover:bg-white/10 ml-1">
+                                                <ChevronDown className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     </div>
-                                    <h3 className="text-white font-bold text-sm leading-tight mb-1">{asset.title}</h3>
-                                    <p className="text-neutral-400 text-xs">{asset.date}</p>
+
+                                    {/* Metadata */}
+                                    <div className="translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300 delay-100">
+                                        <div className="flex items-center gap-2 text-[10px] font-bold text-[#46d369] mb-1">
+                                            <span>98% Match</span>
+                                            <span className="text-neutral-400 border border-neutral-600 px-1 rounded text-[8px] uppercase">HD</span>
+                                            <span className="text-neutral-400">{asset.duration}</span>
+                                        </div>
+
+                                        <h3 className="text-white font-bold text-sm leading-tight mb-1 line-clamp-1">{asset.title}</h3>
+
+                                        <div className="flex items-center gap-2 text-[10px] text-neutral-300">
+                                            <span>Sports</span>
+                                            <span className="text-neutral-600">•</span>
+                                            <span>Action</span>
+                                            <span className="text-neutral-600">•</span>
+                                            <span>Viral</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +114,7 @@ export function ContentRow({ title, assets }: ContentRowProps) {
 
                 <button
                     onClick={() => scroll('right')}
-                    className="absolute right-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+                    className="absolute right-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center transition-all duration-300 backdrop-blur-sm cursor-pointer opacity-0 group-hover:opacity-100"
                 >
                     <ChevronRight className="w-8 h-8" />
                 </button>

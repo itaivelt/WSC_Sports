@@ -2,11 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { PlaySquare, BarChart3, Settings, Zap, ChevronDown, Check, Users, Globe, Building, Library, FileCog } from "lucide-react";
+import { PlaySquare, BarChart3, Settings, Zap, ChevronDown, Check, Users, Globe, Building, Library, FileCog, Brain } from "lucide-react";
 import { useRightsProvider, RightsProvider } from "@/lib/rights-provider-context";
-
-// Role Type Definition
-type UserRole = 'WSC_ADMIN' | 'PARTNER_ADMIN';
+import { useUserRole, UserRole } from "@/lib/user-role-context";
 
 const PROVIDERS: { name: RightsProvider; logo: string }[] = [
     { name: "NBA", logo: "https://cdn.nba.com/logos/leagues/logo-nba.svg" },
@@ -22,11 +20,9 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
     const router = useRouter();
     const pathname = usePathname();
     const { selectedProvider, setSelectedProvider } = useRightsProvider();
+    const { userRole, setUserRole } = useUserRole();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-
-    // Demo State: Toggle between WSC Admin and Partner Admin
-    const [userRole, setUserRole] = useState<UserRole>('WSC_ADMIN');
 
     // Track last visited page for each role
     const [lastVisited, setLastVisited] = useState<{ [key in UserRole]: string }>({
@@ -68,6 +64,7 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
     const navigation = userRole === 'WSC_ADMIN'
         ? [
             { name: "Partners", href: "/admin/partners", icon: Globe },
+            { name: "Rights Manager", href: "/admin/rights", icon: Brain },
             { name: "Partner Hub", href: "/hub", icon: PlaySquare },
             { name: "Library", href: "/library", icon: Library },
             { name: "Content Rules", href: "/rules", icon: FileCog },
@@ -84,48 +81,18 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
     return (
         <div className={cn("flex h-full w-64 flex-col bg-black border-r border-[#1a1a1a]", className)}>
             {/* Header / Tenant Switcher */}
-            <div className="flex h-16 items-center px-4 border-b border-[#1a1a1a] relative" ref={dropdownRef}>
+            <div className="flex h-16 items-center px-4 border-b border-[#1a1a1a]">
                 {userRole === 'PARTNER_ADMIN' ? (
-                    /* PARTNER ADMIN: Dropdown to switch between RIGHTS they own (e.g. NBA/WNBA/G-League) */
-                    <>
-                        <div
-                            className="flex items-center gap-2 w-full p-2 rounded-md hover:bg-[#1a1a1a] cursor-pointer group transition-colors relative"
-                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        >
-                            <div className="bg-white p-1 rounded-md h-8 w-8 flex items-center justify-center overflow-hidden">
-                                <img src={currentProvider.logo} alt={currentProvider.name} className="w-full h-full object-contain" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="text-sm font-bold text-white truncate">{selectedProvider}</div>
-                                <div className="text-[10px] text-neutral-500 truncate group-hover:text-neutral-400">Switch Rights Holder</div>
-                            </div>
-                            <ChevronDown className={cn("h-4 w-4 text-neutral-500 transition-transform", isDropdownOpen && "rotate-180")} />
+                    /* PARTNER ADMIN: Static Header (ESPN) */
+                    <div className="flex items-center gap-2 w-full p-2 rounded-md">
+                        <div className="bg-white p-1 rounded-md h-8 w-8 flex items-center justify-center overflow-hidden">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_wordmark.svg" alt="ESPN" className="w-full h-full object-contain" />
                         </div>
-
-                        {isDropdownOpen && (
-                            <div className="absolute top-16 left-2 right-2 bg-[#111] border border-[#333] rounded-md shadow-xl z-50 py-1 max-h-64 overflow-y-auto">
-                                <div className="px-3 py-2 text-xs font-bold text-neutral-500 uppercase tracking-wider">Select Organization</div>
-                                {PROVIDERS.map((provider) => (
-                                    <button
-                                        key={provider.name}
-                                        className="flex items-center gap-3 w-full text-left px-3 py-2 hover:bg-[#222] transition-colors"
-                                        onClick={() => {
-                                            setSelectedProvider(provider.name);
-                                            setIsDropdownOpen(false);
-                                        }}
-                                    >
-                                        <div className="bg-white p-0.5 rounded-sm h-6 w-6 flex items-center justify-center">
-                                            <img src={provider.logo} alt={provider.name} className="w-full h-full object-contain" />
-                                        </div>
-                                        <span className={cn("text-sm flex-1", selectedProvider === provider.name ? "text-[#d0f200] font-bold" : "text-neutral-300")}>
-                                            {provider.name}
-                                        </span>
-                                        {selectedProvider === provider.name && <Check className="h-3 w-3 text-[#d0f200]" />}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </>
+                        <div className="flex-1 min-w-0">
+                            <div className="text-sm font-bold text-white truncate">ESPN</div>
+                            <div className="text-[10px] text-neutral-500 truncate">Partner Account</div>
+                        </div>
+                    </div>
                 ) : (
                     /* WSC ADMIN: Static Header (Always shows NBA as per requirement) */
                     <div className="flex items-center gap-2 w-full p-2 rounded-md">

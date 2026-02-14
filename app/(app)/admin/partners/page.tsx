@@ -10,8 +10,8 @@ export default function PartnersListPage() {
     const [partners] = useState([
         { id: 1, name: "FedEx", logo: "https://upload.wikimedia.org/wikipedia/commons/9/9d/FedEx_Express.svg", status: "Active", users: 120, alerts: 0 },
         { id: 2, name: "ESPN", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_wordmark.svg", status: "Active", users: 312, alerts: 2 },
-        { id: 3, name: "TNT Sports", logo: "https://upload.wikimedia.org/wikipedia/commons/1/14/TNT_Sports_logo.svg", status: "Active", users: 189, alerts: 0 },
-        { id: 4, name: "State Farm", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a2/State_Farm_logo.svg", status: "Active", users: 56, alerts: 0 },
+        { id: 3, name: "TNT Sports", logo: "https://cdn.brandfetch.io/tntsports.co.uk/w/400/h/400", status: "Active", users: 189, alerts: 0 },
+        { id: 4, name: "State Farm", logo: "https://cdn.brandfetch.io/statefarm.com/w/400/h/400", status: "Active", users: 56, alerts: 0 },
         { id: 5, name: "Nike", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg", status: "Active", users: 450, alerts: 1 },
         { id: 6, name: "American Express", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg", status: "Active", users: 95, alerts: 0 },
         { id: 7, name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", status: "Active", users: 800, alerts: 3 },
