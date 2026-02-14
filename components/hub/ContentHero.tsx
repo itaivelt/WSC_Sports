@@ -8,8 +8,8 @@ export function ContentHero() {
             {/* Background Image */}
             <div className="absolute inset-0">
                 <img
-                    src="https://images.unsplash.com/photo-1540747913346-19e32dc3e96e?auto=format&fit=crop&q=80&w=2000"
-                    alt="Featured Content"
+                    src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=2000"
+                    alt="Man City vs Liverpool Highlight"
                     className="w-full h-full object-cover mask-image-b"
                 />
                 {/* Gradient Overlay */}
