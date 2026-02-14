@@ -23,7 +23,7 @@ export function ContentRow({ title, assets }: ContentRowProps) {
     const scroll = (direction: 'left' | 'right') => {
         if (rowRef.current) {
             const { current } = rowRef;
-            const scrollAmount = direction === 'left' ? -current.offsetWidth + 200 : current.offsetWidth - 200;
+            const scrollAmount = direction === 'left' ? -current.offsetWidth * 0.8 : current.offsetWidth * 0.8;
             current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
     };
@@ -38,19 +38,26 @@ export function ContentRow({ title, assets }: ContentRowProps) {
             <div className="relative group">
                 <button
                     onClick={() => scroll('left')}
-                    className="absolute left-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm"
+                    className="absolute left-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center transition-all duration-300 backdrop-blur-sm cursor-pointer"
                 >
                     <ChevronLeft className="w-8 h-8" />
                 </button>
 
                 <div
                     ref={rowRef}
-                    className="flex gap-4 overflow-x-auto scrollbar-hide px-4 md:px-12 pb-8 pt-2 scroll-smooth"
+                    className="flex gap-4 overflow-x-auto px-4 md:px-12 pb-8 pt-2 scroll-smooth snap-x snap-mandatory"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
+                    {/* Hide scrollbar for Webkit browsers */}
+                    <style jsx>{`
+                        div::-webkit-scrollbar {
+                            display: none;
+                        }
+                    `}</style>
                     {assets.map((asset) => (
                         <div
                             key={asset.id}
-                            className="flex-none w-[280px] md:w-[320px] aspect-video relative group/card cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-20 origin-center"
+                            className="flex-none w-[280px] md:w-[320px] aspect-video relative group/card cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-20 origin-center snap-start"
                         >
                             <img
                                 src={asset.thumbnail}
@@ -85,7 +92,7 @@ export function ContentRow({ title, assets }: ContentRowProps) {
 
                 <button
                     onClick={() => scroll('right')}
-                    className="absolute right-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm"
+                    className="absolute right-0 top-0 bottom-0 z-40 bg-black/50 hover:bg-black/80 text-white w-12 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
                 >
                     <ChevronRight className="w-8 h-8" />
                 </button>
