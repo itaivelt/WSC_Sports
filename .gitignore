@@ -20,9 +20,23 @@
 # production
 /build
 
-# misc
+# misc / OS metadata
 .DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
 *.pem
+
+# editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Antigravity / AI agent local state
+.gemini/
+.agent/
 
 # debug
 npm-debug.log*
