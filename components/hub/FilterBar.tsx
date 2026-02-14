@@ -18,12 +18,6 @@ export function FilterBar({ viewMode, setViewMode }: FilterBarProps) {
                     <option>American Football</option>
                 </select>
                 <select className="bg-black border border-white/10 text-neutral-300 text-sm rounded-md focus:ring-[#d0f200] focus:border-[#d0f200] block p-2.5">
-                    <option>All Leagues</option>
-                    <option>Premier League</option>
-                    <option>NBA</option>
-                    <option>NFL</option>
-                </select>
-                <select className="bg-black border border-white/10 text-neutral-300 text-sm rounded-md focus:ring-[#d0f200] focus:border-[#d0f200] block p-2.5">
                     <option>All Seasons</option>
                     <option>2023-24</option>
                     <option>2022-23</option>

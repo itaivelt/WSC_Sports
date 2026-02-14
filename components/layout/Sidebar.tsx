@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { PlaySquare, BarChart3, Settings, Zap, ChevronDown, Check, Users, Globe, Building } from "lucide-react";
+import { PlaySquare, BarChart3, Settings, Zap, ChevronDown, Check, Users, Globe, Building, Library, FileCog } from "lucide-react";
 import { useRightsProvider, RightsProvider } from "@/lib/rights-provider-context";
 
 // Role Type Definition
@@ -19,6 +19,7 @@ const PROVIDERS: { name: RightsProvider; logo: string }[] = [
 ];
 
 export function Sidebar({ className, onClose }: { className?: string; onClose?: () => void }) {
+    const router = useRouter();
     const pathname = usePathname();
     const { selectedProvider, setSelectedProvider } = useRightsProvider();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -26,6 +27,29 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
 
     // Demo State: Toggle between WSC Admin and Partner Admin
     const [userRole, setUserRole] = useState<UserRole>('WSC_ADMIN');
+
+    // Track last visited page for each role
+    const [lastVisited, setLastVisited] = useState<{ [key in UserRole]: string }>({
+        'WSC_ADMIN': '/hub',
+        'PARTNER_ADMIN': '/hub'
+    });
+
+    // Update last visited page when path changes
+    useEffect(() => {
+        setLastVisited(prev => ({
+            ...prev,
+            [userRole]: pathname
+        }));
+    }, [pathname, userRole]);
+
+    const handleRoleSwitch = (newRole: UserRole) => {
+        if (newRole === userRole) return;
+
+        // Navigate to last visited page for the new role, or default to /hub
+        const targetPath = lastVisited[newRole] || '/hub';
+        setUserRole(newRole);
+        router.push(targetPath);
+    };
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -45,6 +69,8 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
         ? [
             { name: "Partners", href: "/admin/partners", icon: Globe },
             { name: "Partner Hub", href: "/hub", icon: PlaySquare },
+            { name: "Library", href: "/library", icon: Library },
+            { name: "Content Rules", href: "/rules", icon: FileCog },
             { name: "Analytics", href: "/analytics", icon: BarChart3 },
             { name: "Settings", href: "/settings", icon: Settings },
         ]
@@ -59,8 +85,8 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
         <div className={cn("flex h-full w-64 flex-col bg-black border-r border-[#1a1a1a]", className)}>
             {/* Header / Tenant Switcher */}
             <div className="flex h-16 items-center px-4 border-b border-[#1a1a1a] relative" ref={dropdownRef}>
-                {userRole === 'WSC_ADMIN' ? (
-                    /* WSC ADMIN: Dropdown to switch between partners */
+                {userRole === 'PARTNER_ADMIN' ? (
+                    /* PARTNER ADMIN: Dropdown to switch between RIGHTS they own (e.g. NBA/WNBA/G-League) */
                     <>
                         <div
                             className="flex items-center gap-2 w-full p-2 rounded-md hover:bg-[#1a1a1a] cursor-pointer group transition-colors relative"
@@ -101,14 +127,14 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
                         )}
                     </>
                 ) : (
-                    /* PARTNER ADMIN: Static Header (cannot switch) */
+                    /* WSC ADMIN: Static Header (Always shows NBA as per requirement) */
                     <div className="flex items-center gap-2 w-full p-2 rounded-md">
                         <div className="bg-white p-1 rounded-md h-8 w-8 flex items-center justify-center overflow-hidden">
-                            <img src={currentProvider.logo} alt={currentProvider.name} className="w-full h-full object-contain" />
+                            <img src={PROVIDERS[0].logo} alt="NBA" className="w-full h-full object-contain" />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <div className="text-sm font-bold text-white truncate">{selectedProvider}</div>
-                            <div className="text-[10px] text-neutral-500 truncate">Partner Admin Portal</div>
+                            <div className="text-sm font-bold text-white truncate">NBA</div>
+                            <div className="text-[10px] text-neutral-500 truncate">Customer View</div>
                         </div>
                     </div>
                 )}
@@ -159,13 +185,13 @@ export function Sidebar({ className, onClose }: { className?: string; onClose?: 
                     <p className="text-[10px] text-neutral-500 mb-2 uppercase font-bold">Demo: Active Persona</p>
                     <div className="flex rounded bg-black p-0.5 border border-[#333]">
                         <button
-                            onClick={() => setUserRole('WSC_ADMIN')}
+                            onClick={() => handleRoleSwitch('WSC_ADMIN')}
                             className={cn("flex-1 text-[10px] py-1 rounded text-center transition-colors", userRole === 'WSC_ADMIN' ? "bg-[#d0f200] text-black font-bold" : "text-neutral-400 hover:text-white")}
                         >
                             WSC Admin
                         </button>
                         <button
-                            onClick={() => setUserRole('PARTNER_ADMIN')}
+                            onClick={() => handleRoleSwitch('PARTNER_ADMIN')}
                             className={cn("flex-1 text-[10px] py-1 rounded text-center transition-colors", userRole === 'PARTNER_ADMIN' ? "bg-[#d0f200] text-black font-bold" : "text-neutral-400 hover:text-white")}
                         >
                             Partner

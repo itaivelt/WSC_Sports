@@ -33,11 +33,7 @@ export function Header({ onMenuClick }: { onMenuClick?: () => void }) {
 
             {/* Admin Controls */}
             <div className="flex items-center gap-3 mr-4 border-r border-white/10 pr-4 hidden md:flex">
-                {/* Clean/Dirty Feed Toggle [V1] */}
-                <div className="flex bg-[#111] rounded-md border border-white/10 p-1">
-                    <button className="px-2 py-1 text-xs font-medium rounded-sm bg-[#d0f200] text-black">Clean Feed</button>
-                    <button className="px-2 py-1 text-xs font-medium rounded-sm text-neutral-400 hover:text-white">TV Feed</button>
-                </div>
+                {/* Clean/Dirty Feed Toggle removed */}
 
                 {/* View As Simulator [V1] */}
                 <div className="flex items-center gap-2 bg-[#111] border border-white/10 rounded-md px-2 py-1.5 cursor-pointer hover:border-[#d0f200] transition-colors group">
