@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partners Statistics: Sports Entertainment Market</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- 
+    Palette Name: Digital Stadium
+    - Primary: #4338ca (Indigo 700)
+    - Secondary: #f43f5e (Rose 500)
+    - Accent: #0ea5e9 (Sky 500)
+    - Background: #f8fafc (Slate 50)
+    - Card Bg: #ffffff (White)
+    -->
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Chart Container Styling - Responsive & Constrained */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%; /* Adapts to grid column */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Mobile base height */
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; /* Tablet/Desktop height */
+            }
+        }
+
+        /* Custom Pyramid for Hierarchy Section (No SVG) */
+        .pyramid-level {
+            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 4px;
+            transition: transform 0.3s ease;
+        }
+        .pyramid-level:hover {
+            transform: scale(1.02);
+        }
+        .pyramid-top {
+            clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+            height: 80px;
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #4338ca, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-rose-200">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- Simple CSS Icon (No SVG) -->
+                <div class="w-8 h-8 bg-indigo-700 rounded-full flex items-center justify-center text-white font-bold text-lg">S</div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-800">SPORTS<span class="text-rose-500">BIZ</span> INSIGHTS</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-600">
+                <a href="#market-overview" class="hover:text-indigo-700 transition">Overview</a>
+                <a href="#industry-spend" class="hover:text-indigo-700 transition">Top Spenders</a>
+                <a href="#media-rights" class="hover:text-indigo-700 transition">Media Rights</a>
+                <a href="#roi-analysis" class="hover:text-indigo-700 transition">ROI</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+
+        <!-- Title Block -->
+        <section class="mb-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
+                The Strategic Game: <br>
+                <span class="text-gradient">Partners in Sports Entertainment</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto">
+                Analyzing the multi-billion dollar ecosystem of sponsorships, media rights, and brand collaborations driving the modern sports industry.
+            </p>
+        </section>
+
+        <!-- SECTION 1: Market Overview (Goal: Inform/Change) -->
+        <section id="market-overview" class="mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- KPI Card 1 -->
+                <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-indigo-700 flex flex-col items-start hover:shadow-lg transition">
+                    <h3 class="text-slate-400 font-bold uppercase tracking-wider text-xs mb-2">Global Sponsorship Market</h3>
+                    <div class="text-5xl font-extrabold text-slate-800 mb-2">$97.4B</div>
+                    <p class="text-sm text-green-600 font-semibold bg-green-100 px-2 py-1 rounded">▲ 8.2% YoY Growth</p>
+                    <p class="text-slate-500 text-sm mt-4">Projected to reach $190B by 2030, driven by digitization and globalization of leagues.</p>
+                </div>
+
+                <!-- KPI Card 2 -->
+                <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-rose-500 flex flex-col items-start hover:shadow-lg transition">
+                    <h3 class="text-slate-400 font-bold uppercase tracking-wider text-xs mb-2">Jersey Patch Value</h3>
+                    <div class="text-5xl font-extrabold text-slate-800 mb-2">$1.2B+</div>
+                    <p class="text-sm text-indigo-600 font-semibold bg-indigo-100 px-2 py-1 rounded">Top 5 Leagues Only</p>
+                    <p class="text-slate-500 text-sm mt-4">Prime real estate on athlete uniforms continues to command premium valuation across NBA, PL, and MLB.</p>
+                </div>
+
+                <!-- KPI Card 3 -->
+                <div class="bg-white rounded-xl shadow-md p-8 border-l-4 border-sky-500 flex flex-col items-start hover:shadow-lg transition">
+                    <h3 class="text-slate-400 font-bold uppercase tracking-wider text-xs mb-2">Streaming Rights Share</h3>
+                    <div class="text-5xl font-extrabold text-slate-800 mb-2">35%</div>
+                    <p class="text-sm text-sky-600 font-semibold bg-sky-100 px-2 py-1 rounded">And Accelerating</p>
+                    <p class="text-slate-500 text-sm mt-4">Digital platforms (Amazon, Apple, DAZN) are aggressively acquiring tier-1 broadcasting rights.</p>
+                </div>
+            </div>
+
+            <!-- Market Forecast Chart -->
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div class="mb-4 md:mb-0">
+                        <h2 class="text-2xl font-bold text-slate-800">Sponsorship Market Valuation Forecast</h2>
+                        <p class="text-slate-500 text-sm">Projected growth of global sports sponsorship spend (2020-2030).</p>
+                    </div>
+                </div>
+                <!-- Chart Container -->
+                <div class="chart-container h-80 md:h-96 w-full">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+                <p class="text-slate-500 text-sm mt-4 italic border-l-2 border-indigo-200 pl-4">
+                    <strong>Insight:</strong> The post-pandemic recovery has been sharp. The market is witnessing a compound annual growth rate (CAGR) of approximately 8.7%, fueled largely by emerging markets in APAC and the Middle East.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Industry Spend (Goal: Compare) -->
+        <section id="industry-spend" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="flex flex-col justify-center">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Who Funds the Game?</h2>
+                        <h3 class="text-lg font-semibold text-rose-500 mb-4">Top Spending Industries by Volume</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            While traditional heavyweights like <strong>Automotive</strong> and <strong>Beverages</strong> remain foundational pillars, the landscape is shifting. 
+                            <br><br>
+                            The <strong>Technology</strong> and <strong>Financial Services</strong> (specifically Fintech and Crypto) sectors have surged into the top tiers, viewing sports partnerships as the ultimate vehicle for trust-building and mass adoption. Betting firms continue to dominate in regions with relaxed regulations.
+                        </p>
+                        
+                        <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-100">
+                            <h4 class="font-bold text-indigo-800 mb-2">Key Trend: The Tech Takeover</h4>
+                            <p class="text-sm text-indigo-700">Tech partnerships have evolved from simple logo slaps to integrated "Official Cloud Partner" or "Official Analytics Partner" roles, enhancing the fan experience directly.</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <!-- Chart Container -->
+                        <div class="chart-container">
+                            <canvas id="industrySpendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Media Rights & Streaming (Goal: Composition/Trend) -->
+        <section id="media-rights" class="mb-20">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 text-center">The Battle for Eyeballs: Media Rights</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Doughnut Chart: Rights Distribution -->
+                <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Media Rights Value Distribution</h3>
+                    <p class="text-slate-500 text-sm mb-6">Traditional Broadcasters vs. Digital Streaming Platforms (2025 Est.)</p>
+                    
+                    <div class="chart-container mx-auto" style="max-width: 400px; max-height: 400px;">
+                        <canvas id="streamingShareChart"></canvas>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-slate-600">
+                            <strong>Streaming (35%)</strong> is rapidly eating into the share held by <strong>Cable/Linear TV (55%)</strong>. Social and Direct-to-Consumer (DTC) make up the remaining 10%.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Text Content & Stats -->
+                <div class="flex flex-col gap-6">
+                     <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-sky-500 h-full">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">The "Unbundling" of Sports</h3>
+                        <p class="text-slate-600 mb-4">
+                            The era of the "one channel for everything" is over. Rights are fragmenting. A single league might split its season across Amazon Prime (Thursday), Apple TV (Friday), and NBC/ESPN (Weekend).
+                        </p>
+                        <ul class="space-y-3 mt-4">
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs mr-3 mt-1">1</span>
+                                <span class="text-sm text-slate-700"><strong>Global Reach:</strong> Digital platforms offer immediate global distribution without negotiating hundreds of local cable deals.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs mr-3 mt-1">2</span>
+                                <span class="text-sm text-slate-700"><strong>Interactive Features:</strong> Real-time betting overlays, multi-cam angles, and statistical deep-dives are native to streaming.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs mr-3 mt-1">3</span>
+                                <span class="text-sm text-slate-700"><strong>Younger Demographics:</strong> Gen Z consumption is almost exclusively digital/mobile.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Partnership Hierarchy (Goal: Organize/Hierarchy) -->
+        <section class="mb-20">
+             <div class="bg-indigo-900 rounded-2xl shadow-xl p-8 md:p-12 text-white">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4">The Sponsorship Pyramid</h2>
+                        <p class="text-indigo-200 mb-6">
+                            Not all partnerships are created equal. The hierarchy defines visibility, exclusivity, and cost. Understanding these tiers is crucial for analyzing partner statistics.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="border-l-2 border-rose-500 pl-4">
+                                <h4 class="font-bold text-rose-400">Title Sponsors</h4>
+                                <p class="text-sm text-indigo-100">Highest tier. The brand name becomes part of the event/team name (e.g., "Barclays Premier League").</p>
+                            </div>
+                             <div class="border-l-2 border-sky-400 pl-4">
+                                <h4 class="font-bold text-sky-400">Official Partners</h4>
+                                <p class="text-sm text-indigo-100">Category exclusivity (e.g., "The Official Bank of the NFL"). High visibility assets.</p>
+                            </div>
+                             <div class="border-l-2 border-indigo-400 pl-4">
+                                <h4 class="font-bold text-indigo-300">Regional/Suppliers</h4>
+                                <p class="text-sm text-indigo-100">Lower cost, geographically limited rights or "Official Supplier" status.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSS Pyramid Implementation -->
+                    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                        <!-- Top Level -->
+                        <div class="pyramid-top w-40 bg-rose-500 flex items-end justify-center pb-2 text-white text-xs font-bold shadow-lg z-30">
+                            TITLE SPONSOR
+                        </div>
+                        <!-- Mid Level -->
+                        <div class="pyramid-level w-60 h-20 bg-sky-500 -mt-0 shadow-md z-20 text-sm">
+                            OFFICIAL PARTNERS
+                        </div>
+                        <!-- Base Level -->
+                        <div class="pyramid-level w-80 h-20 bg-indigo-600 -mt-0 shadow-sm z-10 text-sm">
+                            REGIONAL / SUPPLIERS
+                        </div>
+                         <!-- Base Base Level -->
+                        <div class="pyramid-level w-96 h-16 bg-slate-700 -mt-0 z-0 text-xs">
+                            LICENSING & MERCHANDISING
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: ROI Analysis (Goal: Relationships) -->
+        <section id="roi-analysis" class="mb-20">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2">Analyzing Impact: Cost vs. Reach</h2>
+            <p class="text-slate-500 mb-8 max-w-2xl">A comparative look at different partnership assets. The size of the bubble represents the estimated <strong>Brand Conversion Rate</strong>.</p>
+
+            <div class="bg-white rounded-xl shadow-md p-4 md:p-6">
+                <div class="chart-container h-96 w-full">
+                    <canvas id="roiBubbleChart"></canvas>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-xs text-center text-slate-500">
+                    <div><span class="inline-block w-3 h-3 rounded-full bg-rose-500 mr-1"></span>Jersey Patch (High Visibility)</div>
+                    <div><span class="inline-block w-3 h-3 rounded-full bg-indigo-500 mr-1"></span>Stadium Naming (High Cost)</div>
+                    <div><span class="inline-block w-3 h-3 rounded-full bg-sky-500 mr-1"></span>Digital Content (High Vol)</div>
+                    <div><span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-1"></span>LED Boards (Med Reach)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Emerging Trends (Goal: Trend) -->
+        <section class="mb-12">
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Women's Sports -->
+                <div class="flex-1 bg-white rounded-xl shadow-md p-6 md:p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-slate-800">The Rise of Women's Sports</h3>
+                        <span class="bg-rose-100 text-rose-600 text-xs font-bold px-2 py-1 rounded-full">HOT TREND</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6">Investment in women's sports is outpacing men's sports in percentage growth. Brands are finding higher engagement rates and a more loyal fanbase.</p>
+                    
+                    <div class="chart-container h-64 w-full">
+                        <canvas id="womensSportsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Text Summary -->
+                <div class="flex-1 flex flex-col justify-center bg-slate-800 text-white rounded-xl shadow-md p-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-400">Future Outlook: 2026 & Beyond</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Performance-Based Contracts</h4>
+                            <p class="text-sm text-slate-300">Sponsorship deals are moving away from fixed fees to dynamic models based on engagement metrics and conversion.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">AI-Driven Valuation</h4>
+                            <p class="text-sm text-slate-300">Brands are using Computer Vision AI to measure the exact screen time and quality of logo exposure in real-time broadcasts.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Micro-Influencer Athletes</h4>
+                            <p class="text-sm text-slate-300">NIL (Name, Image, Likeness) deals are shifting budget from leagues to individual college and niche sport athletes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <div class="container mx-auto px-4">
+            <p class="mb-2">&copy; 2026 SportsBiz Insights. All Data Simulated for Infographic Purposes.</p>
+            <p>Generated by Canvas Infographics.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT SECTION -->
+    <script>
+        // --- UTILITY: Label Wrapping Logic ---
+        function splitLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length <= maxLength) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- UTILITY: Common Chart Options ---
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: { family: "'Roboto', sans-serif", size: 12 },
+                        color: '#475569',
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.9)',
+                    titleFont: { family: "'Montserrat', sans-serif", size: 13 },
+                    bodyFont: { family: "'Roboto', sans-serif", size: 12 },
+                    padding: 10,
+                    cornerRadius: 6,
+                    displayColors: true,
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // --- CHART 1: Market Growth Forecast (Line Chart) ---
+        const ctxGrowth = document.getElementById('marketGrowthChart').getContext('2d');
+        const growthLabels = ['2020', '2021', '2022', '2023', '2024', '2025 (Est)', '2026 (Proj)', '2028 (Proj)', '2030 (Proj)'];
+        
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: growthLabels.map(l => splitLabel(l)),
+                datasets: [{
+                    label: 'Global Market Value (Billions USD)',
+                    data: [57, 63, 71, 80, 97.4, 108, 120, 150, 190],
+                    borderColor: '#4338ca', // Indigo 700
+                    backgroundColor: 'rgba(67, 56, 202, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#f43f5e', // Rose 500
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: '#e2e8f0' },
+                        ticks: { callback: function(value) { return '$' + value + 'B'; } }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: Industry Spend (Horizontal Bar) ---
+        const ctxSpend = document.getElementById('industrySpendChart').getContext('2d');
+        const industries = ['Financial Services', 'Technology', 'Automotive', 'Beverages (Alcohol)', 'Betting & Gambling', 'Telecommunications', 'Airlines'];
+        const spendData = [12.5, 11.8, 10.2, 9.5, 8.7, 6.4, 5.1]; // Simulated Billions
+
+        new Chart(ctxSpend, {
+            type: 'bar',
+            data: {
+                labels: industries.map(l => splitLabel(l, 20)),
+                datasets: [{
+                    label: 'Annual Spend ($ Billion)',
+                    data: spendData,
+                    backgroundColor: [
+                        '#4338ca', // Indigo
+                        '#4338ca',
+                        '#6366f1', // Indigo lighter
+                        '#818cf8',
+                        '#f43f5e', // Rose (Highlight Betting)
+                        '#cbd5e1',
+                        '#cbd5e1'
+                    ],
+                    borderRadius: 4,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#f1f5f9' },
+                        ticks: { callback: function(value) { return '$' + value + 'B'; } }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 3: Streaming Share (Doughnut) ---
+        const ctxStreaming = document.getElementById('streamingShareChart').getContext('2d');
+        new Chart(ctxStreaming, {
+            type: 'doughnut',
+            data: {
+                labels: ['Traditional Cable/TV', 'Digital Streaming', 'Social/Other'],
+                datasets: [{
+                    data: [55, 35, 10],
+                    backgroundColor: [
+                        '#e2e8f0', // Slate 200 (Fading)
+                        '#0ea5e9', // Sky 500 (Growth)
+                        '#6366f1'  // Indigo 500
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                ...commonOptions,
+                cutout: '65%',
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // --- CHART 4: ROI Bubble Chart (Bubble) ---
+        const ctxBubble = document.getElementById('roiBubbleChart').getContext('2d');
+        
+        // Data Structure: x = Cost (1-10), y = Reach (1-10), r = Brand Conversion Score
+        const bubbleData = [
+            { x: 9, y: 9, r: 15, label: 'Stadium Naming Rights', color: '#4338ca' }, // High Cost, High Reach, Good Conversion
+            { x: 4, y: 8, r: 20, label: 'Jersey Patch', color: '#f43f5e' }, // Med Cost, High Reach, High Conversion
+            { x: 2, y: 7, r: 12, label: 'Social Media Campaigns', color: '#0ea5e9' }, // Low Cost, Med Reach, Med Conversion
+            { x: 6, y: 5, r: 8, label: 'LED Perimeter Boards', color: '#f59e0b' }, // Med Cost, Med Reach, Low Conversion
+            { x: 8, y: 4, r: 5, label: 'Official Timekeeper', color: '#64748b' } // High Cost, Low Reach, Low Conversion
+        ];
+
+        new Chart(ctxBubble, {
+            type: 'bubble',
+            data: {
+                datasets: bubbleData.map(item => ({
+                    label: item.label,
+                    data: [{x: item.x, y: item.y, r: item.r}],
+                    backgroundColor: item.color,
+                    borderColor: '#fff',
+                }))
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { display: false }, // Custom legend used in HTML
+                    tooltip: {
+                        ...commonOptions.plugins.tooltip,
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                return tooltipItems[0].dataset.label;
+                            },
+                            label: function(context) {
+                                return `Cost: ${context.raw.x}/10, Reach: ${context.raw.y}/10`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Cost of Asset (Low to High)' },
+                        min: 0, max: 10,
+                        grid: { color: '#f1f5f9' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Audience Reach (Low to High)' },
+                        min: 0, max: 10,
+                        grid: { color: '#f1f5f9' }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 5: Women's Sports Growth (Grouped Bar - Simplified) ---
+        const ctxWomen = document.getElementById('womensSportsChart').getContext('2d');
+        new Chart(ctxWomen, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Deal Value Growth (%)',
+                    data: [15, 22, 28, 35],
+                    backgroundColor: '#f43f5e', // Rose
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

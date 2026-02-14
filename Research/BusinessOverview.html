@@ -1,0 +1,569 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSC Sports: Partners Portal Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(148, 163, 184, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+    <!-- 
+        Palette Used: "Professional & Stylish / Brilliant Blues & Teals"
+        Background: #0f172a (Deep Slate)
+        Primary Accent: #3b82f6 (Blue)
+        Secondary Accent: #14b8a6 (Teal/Emerald)
+        Highlight: #f97316 (Orange - for Call to Actions/Alerts)
+        Text: #f8fafc (Off-white)
+    -->
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-slate-700 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-bolt text-blue-500 text-2xl mr-3"></i>
+                    <span class="font-bold text-xl tracking-tight text-white">WSC Sports <span class="text-slate-400 font-light">| Partners Portal</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#justification" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Business Case</a>
+                        <a href="#vision" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Vision</a>
+                        <a href="#mvp" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">MVP Scope</a>
+                        <a href="#roadmap" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Roadmap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-16 pb-12 lg:pt-24 lg:pb-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                From Content Creation to <br>
+                <span class="gradient-text">Content Orchestration</span>
+            </h1>
+            <p class="mt-4 text-xl text-slate-400 max-w-3xl mx-auto">
+                A strategic proposal to transform how Rights Holders distribute value to Broadcasters, Sponsors, and Creators through a centralized, rights-aware operating system.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <div class="bg-blue-900/30 border border-blue-500/30 px-6 py-3 rounded-full text-blue-300 text-sm font-semibold">
+                    <i class="fa-solid fa-shield-halved mr-2"></i> Rights-Aware
+                </div>
+                <div class="bg-teal-900/30 border border-teal-500/30 px-6 py-3 rounded-full text-teal-300 text-sm font-semibold">
+                    <i class="fa-solid fa-microchip mr-2"></i> AI-Indexed
+                </div>
+                <div class="bg-purple-900/30 border border-purple-500/30 px-6 py-3 rounded-full text-purple-300 text-sm font-semibold">
+                    <i class="fa-solid fa-users mr-2"></i> Partner-Centric
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-24">
+
+        <!-- Section 1: Business Justification (The Why) -->
+        <section id="justification" class="scroll-mt-24">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-4">Business Justification: The Cost of Friction</h2>
+                <p class="text-slate-400 text-lg">
+                    Rights Holders are currently "drowning" in content. While WSC automates creation, distribution to secondary partners (Sponsors, Betting, Influencers) remains manual and inefficient. This creates a bottleneck that threatens retention and leaves money on the table.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="glass-panel p-6 rounded-2xl shadow-xl">
+                    <h3 class="text-xl font-semibold text-slate-200 mb-6 flex items-center">
+                        <i class="fa-solid fa-clock-rotate-left mr-3 text-orange-400"></i> Operational Efficiency Gain
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-slate-400 italic text-center">
+                        Comparison of weekly hours spent by Rights Holder Admins on manual distribution vs. the proposed Partner Portal automation.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-colors">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-900/50 p-3 rounded-lg">
+                                <i class="fa-solid fa-handcuffs text-blue-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-white">Retention Defense</h4>
+                                <p class="text-slate-400 text-sm mt-1">Deepens WSC's integration into the daily workflow. If we manage their distribution network, switching costs become prohibitively high.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-teal-500 transition-colors">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-teal-900/50 p-3 rounded-lg">
+                                <i class="fa-solid fa-chart-line text-teal-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-white">Upsell & Expansion</h4>
+                                <p class="text-slate-400 text-sm mt-1">Opens revenue streams through "Partner Seat Licenses" or usage-based pricing for premium asset access.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-purple-900/50 p-3 rounded-lg">
+                                <i class="fa-solid fa-database text-purple-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-white">The Data Monopoly</h4>
+                                <p class="text-slate-400 text-sm mt-1">WSC becomes the sole entity tracking <em>who</em> uses <em>what</em> content and <em>where</em>, providing invaluable ROI data to Rights Holders.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Competitive Landscape & UVP -->
+        <section id="vision" class="scroll-mt-24 bg-slate-800/30 -mx-4 px-4 py-16 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 rounded-3xl">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-10 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-4">Unique Value Proposition</h2>
+                    <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+                        Existing solutions like Dropbox or generic DAMs lack the "Sports Logic" required for real-time workflows. The WSC Portal bridges the gap between content storage and sports intelligence.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="glass-panel p-6 rounded-2xl shadow-xl">
+                        <h3 class="text-xl font-semibold text-slate-200 mb-2 text-center">Market Positioning Radar</h3>
+                        <div class="chart-container">
+                            <canvas id="uvpRadarChart"></canvas>
+                        </div>
+                        <p class="mt-4 text-sm text-slate-400 text-center">
+                            WSC outperforms generic file sharing (Dropbox) and traditional DAMs in sports-specific capabilities like AI Indexing and Rights Logic.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="p-4 border-l-4 border-red-500 bg-slate-900/50 rounded-r-lg">
+                            <h4 class="font-bold text-white">Vs. File Sharing (Dropbox/Drive)</h4>
+                            <p class="text-sm text-slate-400">They are just "dumb buckets". We offer AI-indexing allowing partners to find "Messi Goal" instantly without manual tagging.</p>
+                        </div>
+                        <div class="p-4 border-l-4 border-orange-500 bg-slate-900/50 rounded-r-lg">
+                            <h4 class="font-bold text-white">Vs. Traditional DAMs</h4>
+                            <p class="text-sm text-slate-400">They don't understand "Seasons" or "Games". We embed Sports Logic directly into the search and organization structure.</p>
+                        </div>
+                        <div class="p-4 border-l-4 border-blue-500 bg-slate-900/50 rounded-r-lg">
+                            <h4 class="font-bold text-white">Vs. Custom Portals</h4>
+                            <p class="text-sm text-slate-400">Building internally is expensive and lacks our AI engine. We automate Rights Management (Geo-blocking/Embargoes) out of the box.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: User Personas -->
+        <section>
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4 border-l-4 border-teal-500 pl-4">The Ecosystem Personas</h2>
+                <p class="text-slate-400 text-lg">
+                    The portal serves the Rights Holder (Provider) and three distinct Partner types (Consumers), each with unique needs and friction points.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Admin -->
+                <div class="glass-panel p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-blue-500">
+                    <div class="w-12 h-12 bg-blue-900/50 rounded-full flex items-center justify-center mb-4 text-blue-400">
+                        <i class="fa-solid fa-user-shield text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">The Admin</h3>
+                    <p class="text-xs text-blue-400 uppercase font-bold tracking-wider mb-3">Rights Holder</p>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Control Permissions</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Usage Analytics</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Automate Delivery</li>
+                    </ul>
+                </div>
+
+                <!-- Broadcaster -->
+                <div class="glass-panel p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-orange-500">
+                    <div class="w-12 h-12 bg-orange-900/50 rounded-full flex items-center justify-center mb-4 text-orange-400">
+                        <i class="fa-solid fa-broadcast-tower text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Broadcaster</h3>
+                    <p class="text-xs text-orange-400 uppercase font-bold tracking-wider mb-3">Media Partner</p>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Broadcast Quality</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>XML Metadata</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Speed (Real-time)</li>
+                    </ul>
+                </div>
+
+                <!-- Sponsor -->
+                <div class="glass-panel p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-teal-500">
+                    <div class="w-12 h-12 bg-teal-900/50 rounded-full flex items-center justify-center mb-4 text-teal-400">
+                        <i class="fa-solid fa-handshake text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Brand Sponsor</h3>
+                    <p class="text-xs text-teal-400 uppercase font-bold tracking-wider mb-3">Marketing Team</p>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Clean Feeds</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Social Formats</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Curated Collections</li>
+                    </ul>
+                </div>
+
+                <!-- Creator -->
+                <div class="glass-panel p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300 border-t-4 border-purple-500">
+                    <div class="w-12 h-12 bg-purple-900/50 rounded-full flex items-center justify-center mb-4 text-purple-400">
+                        <i class="fa-solid fa-mobile-screen text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Creator</h3>
+                    <p class="text-xs text-purple-400 uppercase font-bold tracking-wider mb-3">Influencer</p>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Mobile Access</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Raw & Edited Clips</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Simple Search</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: MVP Scope & Roadmap -->
+        <section id="mvp" class="scroll-mt-24">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- MVP Donut Chart -->
+                <div class="md:col-span-4 glass-panel p-6 rounded-2xl shadow-xl">
+                    <h3 class="text-xl font-semibold text-slate-200 mb-6 text-center">MVP Engineering Focus</h3>
+                    <div class="chart-container">
+                        <canvas id="mvpDonutChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-xs text-slate-500 text-center">
+                        Resource allocation for Phase 1. Priority is on Security and Search.
+                    </p>
+                </div>
+
+                <!-- Features & Roadmap -->
+                <div class="md:col-span-8 space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Core Feature Set (Must-Haves)</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <span class="font-bold text-blue-400 block mb-1">Smart Access Control</span>
+                                <span class="text-sm text-slate-300">Define Groups (e.g., "Silver Sponsors") to automate visibility rules.</span>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <span class="font-bold text-blue-400 block mb-1">The "Storefront"</span>
+                                <span class="text-sm text-slate-300">White-labeled portal where Partners log in and see specific assets.</span>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <span class="font-bold text-blue-400 block mb-1">Search & Filter</span>
+                                <span class="text-sm text-slate-300">Leverage WSC metadata (Player, Event, Game) for instant retrieval.</span>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <span class="font-bold text-blue-400 block mb-1">Download & Subscribe</span>
+                                <span class="text-sm text-slate-300">Download multiple formats + Push notifications for saved searches.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="roadmap">
+                        <h3 class="text-2xl font-bold text-white mb-4">Strategic Roadmap</h3>
+                        <div class="relative pl-8 border-l-2 border-slate-700 space-y-8">
+                            <div class="relative">
+                                <div class="absolute -left-[39px] bg-blue-500 h-6 w-6 rounded-full border-4 border-slate-900"></div>
+                                <h4 class="text-lg font-bold text-white">Phase 1: The Secure Library (MVP)</h4>
+                                <p class="text-sm text-slate-400">Focus on secure access, search, and manual download. Solve the "Dropbox Chaos".</p>
+                            </div>
+                            <div class="relative opacity-70">
+                                <div class="absolute -left-[39px] bg-slate-600 h-6 w-6 rounded-full border-4 border-slate-900"></div>
+                                <h4 class="text-lg font-bold text-white">Phase 2: The Push</h4>
+                                <p class="text-sm text-slate-400">Automated feeds, API access for partners, and deeper integration into Partner CMS.</p>
+                            </div>
+                            <div class="relative opacity-50">
+                                <div class="absolute -left-[39px] bg-slate-700 h-6 w-6 rounded-full border-4 border-slate-900"></div>
+                                <h4 class="text-lg font-bold text-white">Phase 3: The Marketplace</h4>
+                                <p class="text-sm text-slate-400">Monetization features, upsell premium assets, and transactional workflows.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Architecture Diagram (HTML/CSS) -->
+        <section class="glass-panel p-8 rounded-2xl border border-slate-700">
+            <h2 class="text-3xl font-bold text-white mb-8 text-center">High-Level System Architecture</h2>
+            
+            <div class="max-w-2xl mx-auto space-y-4">
+                <!-- Layer 3: Frontend -->
+                <div class="bg-gradient-to-r from-blue-900 to-indigo-900 p-6 rounded-lg text-center border border-blue-500 shadow-lg relative">
+                    <span class="absolute top-2 left-2 text-[10px] uppercase tracking-widest text-blue-300">Frontend Layer</span>
+                    <div class="text-xl font-bold text-white">Partner Portal UI (React SPA)</div>
+                    <div class="text-sm text-blue-200 mt-2">Search Interface • Video Player • Dashboard • Download Manager</div>
+                </div>
+
+                <!-- Connectors -->
+                <div class="flex justify-center h-8">
+                    <div class="w-0.5 bg-slate-500"></div>
+                </div>
+
+                <!-- Layer 2: Logic -->
+                <div class="bg-gradient-to-r from-teal-900 to-emerald-900 p-6 rounded-lg text-center border border-teal-500 shadow-lg relative">
+                    <span class="absolute top-2 left-2 text-[10px] uppercase tracking-widest text-teal-300">Logic Layer</span>
+                    <div class="text-xl font-bold text-white">Rights & Permission Engine</div>
+                    <div class="text-sm text-teal-200 mt-2">Access Control (ACL) • Geo-blocking Logic • Embargo Rules • Usage Logging</div>
+                </div>
+
+                <!-- Connectors -->
+                <div class="flex justify-center h-8">
+                    <div class="w-0.5 bg-slate-500"></div>
+                </div>
+
+                <!-- Layer 1: Core -->
+                <div class="bg-slate-800 p-6 rounded-lg text-center border border-slate-600 shadow-lg relative opacity-80">
+                    <span class="absolute top-2 left-2 text-[10px] uppercase tracking-widest text-slate-400">Foundation</span>
+                    <div class="text-xl font-bold text-slate-300">WSC Core Platform</div>
+                    <div class="text-sm text-slate-400 mt-2">Video Ingest • AI Indexing • Metadata Generation • Storage</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: KPIs -->
+        <section class="mb-12">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Success Metrics (KPIs)</h2>
+                <p class="text-slate-400 text-lg">Measuring impact through Adoption and Network Growth.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                        <div class="text-4xl font-bold text-blue-500 mb-2">Q1</div>
+                        <div class="text-sm text-slate-400 uppercase tracking-wider">Adoption Target</div>
+                        <div class="mt-2 text-xs text-slate-500">RHs inviting >5 Partners</div>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                        <div class="text-4xl font-bold text-teal-500 mb-2">-40%</div>
+                        <div class="text-sm text-slate-400 uppercase tracking-wider">Support Tickets</div>
+                        <div class="mt-2 text-xs text-slate-500">Related to "Send me clip"</div>
+                    </div>
+                    <div class="col-span-2 bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                        <div class="text-4xl font-bold text-orange-500 mb-2">High</div>
+                        <div class="text-sm text-slate-400 uppercase tracking-wider">Activation Rate</div>
+                        <div class="mt-2 text-xs text-slate-500">% of assets downloaded that are published</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl shadow-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mb-4 text-center">Projected Partner Onboarding</h3>
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-12 bg-slate-900 text-center">
+        <p class="text-slate-500 text-sm">WSC Sports Product Strategy • Director of Product Assignment</p>
+    </footer>
+
+    <!-- Chart.js Implementation -->
+    <script>
+        // Chart Global Defaults
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        
+        // Helper: Label Wrapping for Chart.js
+        function splitLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLength) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Helper: Tooltip Config
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // 1. Efficiency Bar Chart
+        const ctxEfficiency = document.getElementById('efficiencyChart').getContext('2d');
+        new Chart(ctxEfficiency, {
+            type: 'bar',
+            data: {
+                labels: ['Manual Workflow (Email/Dropbox)', 'WSC Partner Portal'],
+                datasets: [{
+                    label: 'Weekly Admin Hours',
+                    data: [20, 2],
+                    backgroundColor: ['#ef4444', '#10b981'],
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Hours / Week' },
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 2. UVP Radar Chart
+        const ctxRadar = document.getElementById('uvpRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['AI Indexing', 'Sports Logic', 'Rights Control', 'Ease of Use', 'Search Speed'],
+                datasets: [{
+                    label: 'WSC Portal',
+                    data: [9, 10, 9, 8, 10],
+                    fill: true,
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: '#3b82f6',
+                    pointBackgroundColor: '#3b82f6',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#3b82f6'
+                }, {
+                    label: 'Generic Cloud Storage',
+                    data: [2, 1, 3, 9, 4],
+                    fill: true,
+                    backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                    borderColor: '#ef4444',
+                    pointBackgroundColor: '#ef4444',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#ef4444'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#cbd5e1' } },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(148, 163, 184, 0.1)' },
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                        pointLabels: {
+                            color: '#94a3b8',
+                            font: { size: 12 }
+                        },
+                        ticks: { backdropColor: 'transparent', display: false }
+                    }
+                }
+            }
+        });
+
+        // 3. MVP Donut Chart
+        const ctxDonut = document.getElementById('mvpDonutChart').getContext('2d');
+        const mvpLabels = ['Access Control & Security', 'Search & Indexing Logic', 'Frontend Storefront UI', 'Analytics & Logging'];
+        const processedMvpLabels = mvpLabels.map(l => splitLabel(l, 16));
+
+        new Chart(ctxDonut, {
+            type: 'doughnut',
+            data: {
+                labels: processedMvpLabels,
+                datasets: [{
+                    data: [35, 30, 25, 10],
+                    backgroundColor: ['#3b82f6', '#14b8a6', '#8b5cf6', '#f97316'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { color: '#cbd5e1' } },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+
+        // 4. Growth Line Chart
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Active Partners',
+                    data: [10, 25, 55, 100, 160, 250],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                        title: { display: true, text: 'Active Partners' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

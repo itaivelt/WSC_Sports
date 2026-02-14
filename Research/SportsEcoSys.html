@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSC Sports - Strategic Value Triangle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #060b14; 
+            color: #f8fafc; 
+            overflow-x: hidden; 
+        }
+        
+        .triangle-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 700px;
+            margin: 0 auto;
+        }
+
+        .node {
+            position: absolute;
+            width: 240px;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            z-index: 10;
+            background: #111927;
+            border: 1px solid #1f2937;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .center-node {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #2563eb 0%, #1e40af 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 60px rgba(37, 99, 235, 0.3);
+            z-index: 20;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .contract-box {
+            position: absolute;
+            background: rgba(31, 41, 55, 0.8);
+            border: 1px solid #3b82f6;
+            color: #60a5fa;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 15;
+        }
+
+        .flow-label {
+            position: absolute;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .corner-rh { top: 0; left: 50%; transform: translateX(-50%); border-top: 4px solid #3b82f6; }
+        .corner-br { bottom: 40px; left: 20px; border-top: 4px solid #0ea5e9; }
+        .corner-pt { bottom: 40px; right: 20px; border-top: 4px solid #a855f7; }
+
+        .dtc-path {
+            stroke: #10b981;
+            stroke-dasharray: 6;
+        }
+    </style>
+</head>
+<body class="p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-16">
+            <div class="inline-block bg-blue-500/10 text-blue-400 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+                Strategic Ecosystem Map
+            </div>
+            <h1 class="text-4xl font-extrabold text-white mb-2">The Sports Media Value Triangle</h1>
+            <p class="text-slate-400">Governance, Content, and Revenue Flows around the Fan</p>
+        </header>
+
+        <div class="triangle-container">
+            <!-- Connection Lines -->
+            <svg viewBox="0 0 900 700">
+                <!-- Main Triangle Frame -->
+                <line x1="450" y1="120" x2="140" y2="550" stroke="#1f2937" stroke-width="2" />
+                <line x1="450" y1="120" x2="760" y2="550" stroke="#1f2937" stroke-width="2" />
+                <line x1="140" y1="550" x2="760" y2="550" stroke="#1f2937" stroke-width="2" />
+
+                <!-- DTC Direct Line -->
+                <line x1="450" y1="150" x2="450" y2="350" class="dtc-path" stroke-width="2" />
+            </svg>
+
+            <!-- Center Node: The Fan -->
+            <div class="center-node">
+                <i class="fa-solid fa-users text-4xl mb-2 text-white"></i>
+                <span class="font-bold text-xl uppercase tracking-tighter text-white">The Fan</span>
+                <span class="text-[10px] text-blue-100 opacity-80 uppercase font-semibold">Ultimate Consumer</span>
+            </div>
+
+            <!-- Top Corner: Rights Holders -->
+            <div class="node corner-rh">
+                <i class="fa-solid fa-crown text-blue-500 text-2xl mb-2"></i>
+                <h3 class="font-bold text-lg text-white">Rights Holders</h3>
+                <p class="text-[11px] text-slate-400 mb-3">Leagues, Teams, Federations</p>
+                <div class="text-[10px] space-y-1 text-slate-300">
+                    <div class="bg-white/5 p-1.5 rounded flex items-center">
+                        <i class="fa-solid fa-shield-halved mr-2 text-blue-400"></i> IP Ownership
+                    </div>
+                    <div class="bg-white/5 p-1.5 rounded flex items-center">
+                        <i class="fa-solid fa-satellite-dish mr-2 text-blue-400"></i> Primary Live Feed
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left Corner: Broadcasters -->
+            <div class="node corner-br">
+                <i class="fa-solid fa-broadcast-tower text-sky-400 text-2xl mb-2"></i>
+                <h3 class="font-bold text-lg text-white">Broadcasters</h3>
+                <p class="text-[11px] text-slate-400 mb-3">ESPN, DAZN, Sky Sports</p>
+                <div class="text-[10px] space-y-1 text-slate-300">
+                    <div class="bg-white/5 p-1.5 rounded flex items-center">
+                        <i class="fa-solid fa-lock mr-2 text-sky-400"></i> Exclusive Air-Time
+                    </div>
+                    <div class="bg-white/5 p-1.5 rounded flex items-center">
+                        <i class="fa-solid fa-money-bill-trend-up mr-2 text-sky-400"></i> Subs & Ad Rev
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Corner: Partners -->
+            <div class="node corner-pt">
+                <i class="fa-solid fa-handshake text-purple-400 text-2xl mb-2"></i>
+                <h3 class="font-bold text-lg text-white">Partners</h3>
+                <p class="text-[11px] text-slate-400 mb-3">Sponsors, Creators, Betting</p>
+                <div class="text-[10px] space-y-1 text-slate-300">
+                    <div class="bg-white/5 p-1.5 rounded flex items-center">
+                        <i class="fa-solid fa-bolt mr-2 text-purple-400"></i> Content Activation
+                    </div>
+                    <div class="bg-white/5 p-1.5 rounded flex items-center">
+                        <i class="fa-solid fa-chart-simple mr-2 text-purple-400"></i> Brand Measurement
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTRACT BOXES -->
+            <div class="contract-box" style="top: 280px; left: 140px; transform: rotate(-60deg);">
+                Media Rights Agreement
+            </div>
+            <div class="contract-box" style="top: 280px; right: 140px; transform: rotate(60deg);">
+                Sponsorship / Licensing Deal
+            </div>
+            <div class="contract-box" style="bottom: 15px; left: 50%; transform: translateX(-50%);">
+                Sub-licensing & Ad Integrations
+            </div>
+
+            <!-- Flow Labels -->
+            <div class="flow-label text-emerald-400 italic" style="top: 220px; left: 50%; transform: translateX(-50%); font-size: 10px;">
+                DTC: Direct Data & Video
+            </div>
+
+            <div class="flow-label" style="top: 450px; left: 220px; transform: rotate(35deg);">
+                Live Broadcast
+            </div>
+
+            <div class="flow-label" style="top: 450px; right: 220px; transform: rotate(-35deg);">
+                Social & Branded Clips
+            </div>
+        </div>
+
+        <!-- Footnote / Legend -->
+        <div class="mt-8 flex justify-center space-x-8 text-[11px] text-slate-500 border-t border-white/5 pt-8">
+            <div class="flex items-center"><span class="w-3 h-3 bg-blue-500 rounded mr-2"></span> Client (RH)</div>
+            <div class="flex items-center"><span class="w-3 h-3 bg-emerald-500 rounded mr-2"></span> Direct Path</div>
+            <div class="flex items-center"><span class="w-3 h-3 border border-blue-400 rounded mr-2"></span> Governing Contract</div>
+        </div>
+    </div>
+
+</body>
+</html>
